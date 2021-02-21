@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>{{dialogTitle}}</h1>
+<div mat-dialog-content>
+    <form [formGroup]="phoneForm" novalidate>
+        <div class="row m-2">
+            <div class="col">
+                <mat-form-field appearance="outline">
+                    <mat-label>Phone Type</mat-label>
+                    <mat-select formControlName="phoneNumberTypeID" [compareWith]="compareWith">
+                      <mat-option value="1">Local Phone</mat-option>
+                      <mat-option value="2">Cellphone</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field appearance="outline">
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput formControlName="phoneNumber" [dropSpecialCharacters]="false" mask="{{phoneForm.get('phoneNumberTypeID').value == 1 ? '(00)0000-0000' : '(00)00000-0000'}}">                    
+                </mat-form-field>
+            </div>            
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+    <button mat-button (click)="savePhone()">Save</button>
+</div>
